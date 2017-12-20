@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import firebase from 'firebase';
-import {Header} from "./components/common";
+import { Header } from './components/common';
+import LoginForm from './components/LoginForm';
 
 
-export default class App extends Component<{}> {
+class App extends Component {
     componentWillMount() {
         // Initialize Firebase
         firebase.initializeApp({
@@ -20,13 +21,11 @@ export default class App extends Component<{}> {
     render() {
         return (
             <View>
-                <Header headerText="Authentication"/>
-                <Text>
-                    Stuff and Things
-                </Text>
+                <Header headerText="Authentication" />
+                <LoginForm/>
             </View>
         );
     }
 }
-
+export default App;
 
