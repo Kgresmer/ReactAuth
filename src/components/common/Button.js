@@ -1,18 +1,20 @@
 import React from 'react';
 import {Text, TouchableOpacity } from 'react-native';
 
-const Button = ({ children, onPress }) => {
+const Button = ({ children, onPress, buttonStyleDyn, textStyleDyn }) => {
     const { buttonStyle, textStyle } = styles;
+    const combinedButtonStyles = Stylesheet.flatten([buttonStyle, buttonStyleDyn]);
+    const combinedTextStyles = Stylesheet.flatten([textStyle, textStyleDyn]);
     return (
-        <TouchableOpacity onPress={onPress} style={buttonStyle}>
-            <Text style={textStyle}>
+        <TouchableOpacity onPress={onPress} style={combinedButtonStyles}>
+            <Text style={combinedTextStyles}>
                 {children}
             </Text>
         </TouchableOpacity>
     )
 };
 
-const styles = {
+const styles = Stylesheet.create({
     buttonStyle: {
         flex: 1,
         alignSelf: 'stretch', //stretch to fill the limits of the container
@@ -31,6 +33,6 @@ const styles = {
         paddingTop: 10,
         paddingBottom: 10
     }
-};
+});
 
 export { Button };
