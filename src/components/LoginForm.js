@@ -27,7 +27,7 @@ class LoginForm extends Component {
               </CardSection>
 
               <CardSection>
-                  <Button textStyleDyn={{color: 'green'}} buttonStyleDyn={{color: 'green', backgroundColor: 'purple'}}>
+                  <Button textStyleDyn={{color: 'green'}} buttonStyleDyn={{borderColor: 'green', backgroundColor: 'purple'}}>
                       Log In/Register
                   </Button>
               </CardSection>
