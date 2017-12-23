@@ -10,7 +10,7 @@ class LoginForm extends Component {
     onButtonPress() {
         const { email, password, error } = this.state;
         this.setState({ error: '', loading: true});
-
+        console.log('submitting form');
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onLoginSuccess.bind(this))
             .catch(() => {
@@ -25,7 +25,12 @@ class LoginForm extends Component {
     }
 
     onLoginSuccess() {
-        this.setState({email: '', password: '', loading: false, error: ''});
+        console.log('login success');
+        this.setState({
+            email: '',
+            password: '',
+            loading: false,
+            error: ''});
     }
 
     renderButton() {
