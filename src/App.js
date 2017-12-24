@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 import firebase from 'firebase';
-import {Header, Button} from './components/common';
+import {Header, Button, Spinner} from './components/common';
 import LoginForm from './components/LoginForm';
 import {CardSection} from "./components/common/CardSection";
 
 
 class App extends Component {
-    state = {loggedIn: false};
+    state = {loggedIn: null};
 
     componentWillMount() {
         // Initialize Firebase
@@ -30,27 +30,51 @@ class App extends Component {
     }
 
     renderContent() {
-        if (this.state.loggedIn) {
-            return (
-                <CardSection>
-                    <Button>
-                        Log Out
-                    </Button>
-                </CardSection>
-            )
+        switch (this.state.loggedIn) {
+            case true:
+                return (
+                    <CardSection>
+                        <Button>
+                            Log Out
+                        </Button>
+                    </CardSection>
+                );
+            case false:
+                return <LoginForm/>;
+            default:
+                return (
+                    <Spinner size="large" />
+                );
         }
-        return <LoginForm/>;
+
     }
 
     render() {
         return (
-            <View>
-                <Header headerText="Authentication"/>
+            <View style={styles.containerStyles}>
+                <View style={styles.headerStyles}>
+                    <Header headerText="Authentication"/>
+                </View>
+                <View style={styles.spinnerStyles}>
                 {this.renderContent()}
+                </View>
             </View>
         );
     }
 }
+
+const styles = {
+    spinnerStyles: {
+        flex: 9
+    },
+    headerStyles: {
+        flex: 1
+    },
+    containerStyles: {
+        flex: 1,
+        flexDirection: 'column',
+    }
+};
 
 export default App;
 
